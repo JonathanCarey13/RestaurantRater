@@ -37,5 +37,33 @@ namespace RestaurantRater.Controllers
 
             return View(restaurant);                // This returns the model that users have already filled out and simply returns it back to the view and populates for us, so you wont lose anything you've filled out
         }
+
+        // Get: Restaurant/Delete/{id}
+        public ActionResult Delete(int? id)         // Puting a question mark by something like an int allows it be a nullable value
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            }
+            Restaurant restaurant = _db.Restaurants.Find(id);
+            if (restaurant == null)
+            {
+                return HttpNotFound();
+            }
+            return View(restaurant);
+        }
+
+        // Post: Restaurant/Delete/{id}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id)
+        {
+            Restaurant restaurant = _db.Restaurants.Find(id);
+            _db.Restaurants.Remove(restaurant);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+
+        }
+
     }
 }
