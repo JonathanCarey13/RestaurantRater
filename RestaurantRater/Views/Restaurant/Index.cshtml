@@ -1,7 +1,51 @@
-﻿
+﻿@*If you were to use multiple models, you could just put a using statement right here, but puting it below is neater and faster. So for example:*@
+
+@*@using RestaurantRater.Models
+
+@model IEnumerable<Restaurant>*@
+
+@model IEnumerable<RestaurantRater.Models.Restaurant>
+
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Restaurants";
 }
 
 <h2>List of Restaurants</h2>
 
+<p>
+    @Html.ActionLink("Rate a Restaurant", "Create")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rating)
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rating)
+            </td>
+            <td>
+                @Html.ActionLink("Change", "Edit", new { id = item.RestaurantID }) |
+                @Html.ActionLink("More Info", "Details", new { id = item.RestaurantID }) |
+                @Html.ActionLink("Remove", "Delete", new { id = item.RestaurantID })
+            </td>
+        </tr>
+    }
+</table>
