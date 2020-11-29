@@ -240,6 +240,7 @@
     <Content Include="Views\Restaurant\Index.cshtml" />
     <Content Include="Views\Restaurant\Create.cshtml" />
     <Content Include="Views\Restaurant\Delete.cshtml" />
+    <Content Include="Views\Restaurant\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
